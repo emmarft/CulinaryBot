@@ -21,7 +21,7 @@ function App() {
           <Route path="/meal-history" element={<MealHistory />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          {/* Ajoute d'autres routes ici si nécessaire */}
+          <Route path="/chatbot" element={<div>Chatbot Component Placeholder</div>} />
         </Routes>
       </Layout>
     </Router>

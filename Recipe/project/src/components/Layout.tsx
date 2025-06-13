@@ -1,13 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { ChefHat, Users, Calendar, Search, Plus } from 'lucide-react'
-
+import { Chatbot } from './Chatbot'
 interface LayoutProps {
   children: React.ReactNode
 }
 
 export function Layout({ children }: LayoutProps) {
   const location = useLocation()
+  const [showChatbot, setShowChatbot] = useState(false)
 
   const navigation = [
     { name: 'Ajouter une recette', href: '/add-recipe', icon: Plus },
@@ -17,7 +18,7 @@ export function Layout({ children }: LayoutProps) {
   ]
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 relative">
       <nav className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
@@ -50,9 +51,20 @@ export function Layout({ children }: LayoutProps) {
           </div>
         </div>
       </nav>
+
       <main className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
         {children}
       </main>
+
+      {/* Bouton chatbot fixe */}
+      <button
+        onClick={() => setShowChatbot(true)}
+        className="fixed bottom-4 right-4 bg-orange-600 text-white p-3 rounded-full shadow-lg hover:bg-orange-700 z-50"
+      >
+        💬
+      </button>
+
+      {showChatbot && <Chatbot onClose={() => setShowChatbot(false)} />}
     </div>
   )
 }
